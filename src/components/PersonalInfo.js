@@ -30,7 +30,7 @@ class PersonalInfo extends Component {
                (<>
                     <input type="text" onChange={this.handleChange} id="firstName" placeholder="First Name" value={this.state.firstName} />
                     <input type="text" onChange={this.handleChange} id="lastName" placeholder="Last Name" value={this.state.lastName} />
-                    <input type="text" onChange={this.handleChange} id="email" placeholder="Email" value={this.state.email} />
+                    <input type="email" onChange={this.handleChange} id="email" placeholder="Email" value={this.state.email} />
                     <input type="text" onChange={this.handleChange} id="phone" placeholder="Phone" value={this.state.phone} />
                     <input type="text" onChange={this.handleChange} id="location" placeholder="Location" value={this.state.location} />
                     <button id="save" onClick={this.toggleEdit}>Save</button>

@@ -43,7 +43,7 @@ class Education extends Component {
                     <label htmlFor="isPresent">Current Education: </label>
                     <input type="checkbox" onChange={this.handleCheckbox} id="isPresent" checked={this.state.isPresent} />
                     <button id="save-btn" onClick={this.toggleEdit}>Save</button>
-                    <button id="delete-btn" data-entry={this.props.id} onClick={this.props.handleDelete}>Delete</button>
+                    <button id="delete-btn" data-education={this.props.id} onClick={this.props.handleDelete}>Delete</button>
                 </div>)
            : (<div className="edu-entry">
                 <p>{this.state.courseName}</p>

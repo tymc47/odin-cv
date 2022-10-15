@@ -10,6 +10,7 @@ class WorkExp extends Component {
             companyLocation: "Hong Kong",
             startDate: "2016-10-30", 
             endDate: "2022-10-30",
+            jobDescription: "abcdefg",
             isPresent: false
         }
         this.handleChange = this.handleChange.bind(this);
@@ -42,14 +43,17 @@ class WorkExp extends Component {
                     <input type="date" onChange={this.handleChange} id="endDate" disabled = {this.state.isPresent} value={this.state.endDate} />
                     <label htmlFor="isPresent">Current Job: </label>
                     <input type="checkbox" onChange={this.handleCheckbox} id="isPresent" checked={this.state.isPresent} />
+                    <label htmlFor="job-description">Job description: </label>
+                    <textarea rows="8" col="33" onChange={this.handleChange} id="jobDescription" value={this.state.jobDescription} />
                     <button id="save-btn" onClick={this.toggleEdit}>Save</button>
-                    <button id="delete-btn" data-entry={this.props.id} onClick={this.props.handleDelete}>Delete</button>
+                    <button id="delete-btn" data-workExp={this.props.id} onClick={this.props.handleDelete}>Delete</button>
                 </div>)
            : (<div className="edu-entry">
                 <p>{this.state.jobTitle}</p>
                 <p>{this.state.company}</p> 
                 <p>{this.state.companyLocation}</p>
                 <p>{this.state.startDate} - {this.state.isPresent ? "Present" : this.state.endDate}</p>
+                <p>{this.state.jobDescription}</p>
                 <button id="edit-btn" onClick={this.toggleEdit}>Edit</button>
             </div>
         )

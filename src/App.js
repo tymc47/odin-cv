@@ -2,45 +2,47 @@ import React, { Component } from "react";
 import PersonalInfo from "./components/PersonalInfo";
 import Education from "./components/Education";
 import WorkExp from "./components/WorkExp";
+import Skills from "./components/Skills";
+import "./styles/app.css";
 
 class App extends Component {
   constructor(props){
     super();
     this.state = {
       education: [],
-      workExp: []
+      workExp: [],
+      skills: [],
     }
     this.handleAdd = this.handleAdd.bind(this);
-    this.deleteEducation = this.deleteEducation.bind(this);
-    this.deleteWorkExp = this.deleteWorkExp.bind(this);
-
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   handleAdd(event){
-    if (event.target.classList.contains('education')){
+    const classList = event.target.classList 
+    if (classList.contains('education')){
       this.setState({
-        education: this.state.education.concat(<Education key={this.state.education.length} id={this.state.education.length} handleDelete={this.deleteEducation}/>)
+        education: this.state.education.concat(<Education key={this.state.education.length} id={this.state.education.length} handleDelete={this.handleDelete}/>)
         }
       )
+    } else if(classList.contains('work-exp')) {
+      this.setState({
+        workExp: this.state.workExp.concat(<WorkExp key={this.state.workExp.length} id={this.state.workExp.length} handleDelete={this.handleDelete}/>)
+      })
     } else {
       this.setState({
-        workExp: this.state.workExp.concat(<WorkExp key={this.state.workExp.length} id={this.state.workExp.length} handleDelete={this.deleteWorkExp}/>)
+        skills: this.state.skills.concat(<Skills key={this.state.skills.length} id={this.state.skills.length} handleDelete={this.handleDelete}/>)
       })
     }
    
   }
 
-  deleteEducation(event){
-    const index = event.target.dataset.entry
-    const newArray = this.state.education.filter(entry => entry.key !== index)
-    this.setState({education: newArray})
-  }
-
-  deleteWorkExp(event){
-    const index = event.target.dataset.entry
-    const newArray = this.state.workExp.filter(entry => entry.key !== index)
-    console.log(newArray);
-    this.setState({workExp: newArray})
+  handleDelete(event){   
+    const dataset = event.target.dataset;
+    let keyName = 'education' in dataset ? 'education' :
+                  'workExp' in dataset ? 'work-exp' : 'skills';
+    const index = event.target.dataset[keyName]
+    const newArray = this.state[keyName].filter(entry => entry.key !== index)
+    this.setState({[keyName]: newArray})
   }
 
   render(){
@@ -49,6 +51,11 @@ class App extends Component {
         <div className="personal-info">
           <h1>Personal Information</h1>
           <PersonalInfo />
+        </div>
+        <div className="skills">
+          <h1>Skills</h1>
+          {this.state.skills.map((component) => component)}
+          <button className="add-btn skills" onClick={this.handleAdd}>Add</button>
         </div>
         <div className="education">
           <h1>Education</h1>
