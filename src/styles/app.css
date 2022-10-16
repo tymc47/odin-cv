@@ -3,6 +3,11 @@
     flex-direction: column;
     color: #262626;
     margin: 0% 20%;
+    border: #262626 2px solid;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    overflow: hidden;
+
 }
 
 .banner {
@@ -12,12 +17,17 @@
     padding: 2%;
 }
 
+.education, .info, .work-exp, .skills {
+    padding: 0% 2%;
+}
+
 hr {
-    margin: 0%;
-    width: 100%;
+    margin: 0% 3%;
+    width: 95%;
     background-color: #262626;
     height: 2px;
     border: none;
+    
 }
 
 .section-title {
@@ -28,6 +38,7 @@ hr {
 
 .add-btn {
     display: none;
+    padding: 0.5rem 1rem;
 }
 
 .section-title:hover .add-btn{
