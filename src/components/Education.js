@@ -39,8 +39,8 @@ class Education extends Component {
         return this.state.isEdit ?
                (<div className="edu-form">
                     <div className="name-input">
-                        <input type="text" onChange={this.handleChange} id="courseName" placeholder="First Name" value={this.state.courseName} />
-                        <input type="text" onChange={this.handleChange} id="schoolName" placeholder="Last Name" value={this.state.schoolName} />
+                        <input type="text" onChange={this.handleChange} id="schoolName" placeholder="School Name" value={this.state.schoolName} />
+                        <input type="text" onChange={this.handleChange} id="courseName" placeholder="Program Name" value={this.state.courseName} />
                     </div>
                     <div className="info-input">
                         <input type="date" onChange={this.handleChange} id="startDate" value={this.state.startDate} />
@@ -49,7 +49,7 @@ class Education extends Component {
                             <input type="checkbox" onChange={this.handleCheckbox} id="isPresent" checked={this.state.isPresent} />
                         
                         </label>
-                        <input type="text" onChange={this.handleChange} id="schoolLocation" placeholder="Email" value={this.state.schoolLocation} />
+                        <input type="text" onChange={this.handleChange} id="schoolLocation" placeholder="School Location" value={this.state.schoolLocation} />
                     </div>
                     <div className="button">
                         <button id="save-btn" onClick={this.toggleEdit}>Save</button>

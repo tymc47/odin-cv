@@ -48,6 +48,11 @@ class App extends Component {
   render(){
     return(
       <div className="main">
+
+        <div className="banner">
+          <h1>CV Builder</h1>
+          <span>Build your CV. Hover to different sections to start.</span>
+        </div>
         
         <PersonalInfo />
         <hr />
