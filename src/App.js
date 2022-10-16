@@ -10,7 +10,7 @@ class App extends Component {
     super();
     this.state = {
       education: [],
-      workExp: [],
+      workexp: [],
       skills: [],
     }
     this.handleAdd = this.handleAdd.bind(this);
@@ -24,9 +24,9 @@ class App extends Component {
         education: this.state.education.concat(<Education key={this.state.education.length} id={this.state.education.length} handleDelete={this.handleDelete}/>)
         }
       )
-    } else if(classList.contains('work-exp')) {
+    } else if(classList.contains('workexp')) {
       this.setState({
-        workExp: this.state.workExp.concat(<WorkExp key={this.state.workExp.length} id={this.state.workExp.length} handleDelete={this.handleDelete}/>)
+        workexp: this.state.workexp.concat(<WorkExp key={this.state.workexp.length} id={this.state.workexp.length} handleDelete={this.handleDelete}/>)
       })
     } else {
       this.setState({
@@ -39,7 +39,7 @@ class App extends Component {
   handleDelete(event){   
     const dataset = event.target.dataset;
     let keyName = 'education' in dataset ? 'education' :
-                  'workExp' in dataset ? 'work-exp' : 'skills';
+                  'workexp' in dataset ? 'workexp' : 'skills';
     const index = event.target.dataset[keyName]
     const newArray = this.state[keyName].filter(entry => entry.key !== index)
     this.setState({[keyName]: newArray})
@@ -68,9 +68,9 @@ class App extends Component {
         <div className="work-exp">
           <div className="section-title">
             <h1>Work Experience</h1>
-            <button className="add-btn work-exp" onClick={this.handleAdd}>+</button>
+            <button className="add-btn workexp" onClick={this.handleAdd}>+</button>
           </div>
-          {this.state.workExp.map((component) => component)}
+          {this.state.workexp.map((component) => component)}
         </div>
         <hr />
         <div className="skills">

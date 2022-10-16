@@ -55,7 +55,7 @@ class WorkExp extends Component {
 
                     <div className="button">
                         <button id="save-btn" onClick={this.toggleEdit}>Save</button>
-                        <button id="delete-btn" data-workExp={this.props.id} onClick={this.props.handleDelete}>Delete</button>
+                        <button id="delete-btn" data-workexp={this.props.id} onClick={this.props.handleDelete}>Delete</button>
                     </div>
                 </div>)
            : (<div className="work output" onClick={this.toggleEdit}>
