@@ -48,24 +48,33 @@ class App extends Component {
   render(){
     return(
       <div className="main">
-        <div className="personal-info">
-          <h1>Personal Information</h1>
-          <PersonalInfo />
-        </div>
-        <div className="skills">
-          <h1>Skills</h1>
-          {this.state.skills.map((component) => component)}
-          <button className="add-btn skills" onClick={this.handleAdd}>Add</button>
-        </div>
+        
+        <PersonalInfo />
+        <hr />
+        
         <div className="education">
-          <h1>Education</h1>
-          <button className="add-btn education" onClick={this.handleAdd}>Add</button>
+          <div className="section-title">
+            <h1>Education</h1>
+            <button className="add-btn education" onClick={this.handleAdd}>+</button>
+          </div>
           {this.state.education.map((component) => component)}
         </div>
+        <hr />
         <div className="work-exp">
-          <h1>Work Experience</h1>
-          <button className="add-btn work-exp" onClick={this.handleAdd}>Add</button>
+          <div className="section-title">
+            <h1>Work Experience</h1>
+            <button className="add-btn work-exp" onClick={this.handleAdd}>+</button>
+          </div>
           {this.state.workExp.map((component) => component)}
+        </div>
+        <hr />
+        <div className="skills">
+          <div className="section-title">
+            <h1>Skills</h1>
+            <button className="add-btn skills" onClick={this.handleAdd}>+</button>
+          </div>
+
+          {this.state.skills.map((component) => component)}
         </div>
       </div>
     )

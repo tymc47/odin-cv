@@ -1,0 +1,106 @@
+.output {
+    position: relative;
+    padding: 0% 5%;
+    display: flex;
+    justify-content: space-between;
+    transition: .5s ease;
+}
+
+.output::after {
+    content: "Edit";
+    position: absolute;
+    opacity: 0;
+    transition: .5s ease;
+    text-align: center;
+    font-size: 1.5rem;
+    color: #f9f9f9;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+}
+
+.output:hover::after {
+    opacity: 1;
+}
+
+.output:hover{
+    background-color: #262626;
+}
+
+/* Personal Info */
+.output.info {
+    margin-top: 5%;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0%;
+    padding: 0%;
+}
+
+.name {
+    font-size: 2.2rem;
+}
+
+.info-list {
+    font-size: 1.2rem;
+    border-spacing: 15px 5px;
+}
+
+
+
+/* Education */
+.education.output {
+    margin-bottom: 2%;
+}
+
+/* WorkExp */
+.work.output {
+    margin-bottom: 2%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+
+
+.job-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.school-name, .company{
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.program, .title {
+    font-style: italic;
+}
+
+.date-location {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-style: italic;
+}
+
+
+/* Skill */
+.skill.output {
+    margin-bottom: 2%;
+    column-gap: 4rem;
+}
+
+.skillset {
+    font-weight: 600;
+    font-size: 1.2rem;
+    
+}
+
+.proficiency {
+    flex: 1;
+    font-weight: 500;
+    font-style: italic;
+}
