@@ -1,73 +1,58 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import "../styles/output.css"
 
 
 
-class Education extends Component {
-    constructor (props) {
-        super(props);
-        this.state = {
-            isEdit: true,
-            courseName: "",
+const Education  = (props) => {
+    const [isEdit, setIsEdit] = useState(true);
+    const [eduInfo, setEduInfo] = useState({
+        courseName: "",
             schoolName: "",
             schoolLocation: "",
             startDate: "", 
             endDate: "",
             isPresent: false
-        }
-        this.handleChange = this.handleChange.bind(this);
-        this.handleCheckbox = this.handleCheckbox.bind(this);
-        this.toggleEdit = this.toggleEdit.bind(this);
+    })
 
-    }
+    const handleChange = (event) => setEduInfo({...eduInfo, [event.target.id]: event.target.value})
+    
 
-    handleChange(event){
-        this.setState({
-            [event.target.id]: event.target.value
-        })
-    }
+    const handleCheckbox = () => setEduInfo({...eduInfo, isPresent: !eduInfo.isPresent})
+    
 
-    handleCheckbox(event){
-        this.setState({isPresent: event.target.checked})
-    }
+    const toggleEdit = () => setIsEdit(!isEdit);
 
-    toggleEdit(){
-        this.setState({isEdit: this.state.isEdit ? false : true})
-    }
-
-    render(){
-        return this.state.isEdit ?
+        return isEdit ?
                (<div className="edu-form">
                     <div className="name-input">
-                        <input type="text" onChange={this.handleChange} id="schoolName" placeholder="School Name" value={this.state.schoolName} />
-                        <input type="text" onChange={this.handleChange} id="courseName" placeholder="Program Name" value={this.state.courseName} />
+                        <input type="text" onChange={handleChange} id="schoolName" placeholder="School Name" value={eduInfo.schoolName} />
+                        <input type="text" onChange={handleChange} id="courseName" placeholder="Program Name" value={eduInfo.courseName} />
                     </div>
                     <div className="info-input">
-                        <input type="date" onChange={this.handleChange} id="startDate" value={this.state.startDate} />
-                        <input type="date" onChange={this.handleChange} id="endDate" disabled = {this.state.isPresent} value={this.state.endDate} />
+                        <input type="date" onChange={handleChange} id="startDate" value={eduInfo.startDate} />
+                        <input type="date" onChange={handleChange} id="endDate" disabled = {eduInfo.isPresent} value={eduInfo.endDate} />
                         <label htmlFor="isPresent">Current Education: 
-                            <input type="checkbox" onChange={this.handleCheckbox} id="isPresent" checked={this.state.isPresent} />
+                            <input type="checkbox" onChange={handleCheckbox} id="isPresent" checked={eduInfo.isPresent} />
                         
                         </label>
-                        <input type="text" onChange={this.handleChange} id="schoolLocation" placeholder="School Location" value={this.state.schoolLocation} />
+                        <input type="text" onChange={handleChange} id="schoolLocation" placeholder="School Location" value={eduInfo.schoolLocation} />
                     </div>
                     <div className="button">
-                        <button id="save-btn" onClick={this.toggleEdit}>Save</button>
-                        <button id="delete-btn" data-education={this.props.id} onClick={this.props.handleDelete}>Delete</button>
+                        <button id="save-btn" onClick={toggleEdit}>Save</button>
+                        <button id="delete-btn" data-education={props.id} onClick={props.handleDelete}>Delete</button>
                     </div>
                 </div>)
-           : (<div className="education output" onClick={this.toggleEdit}>
+           : (<div className="education output" onClick={toggleEdit}>
                 <ul>
-                    <li className="school-name">{this.state.schoolName}</li> 
-                    <li className="program">{this.state.courseName}</li>
+                    <li className="school-name">{eduInfo.schoolName}</li> 
+                    <li className="program">{eduInfo.courseName}</li>
                 </ul>
                 <div className="date-location">
-                    <span>{this.state.startDate} - {this.state.isPresent ? "Present" : this.state.endDate}</span> 
-                    <span>{this.state.schoolLocation}</span>
+                    <span>{eduInfo.startDate} - {eduInfo.isPresent ? "Present" : eduInfo.endDate}</span> 
+                    <span>{eduInfo.schoolLocation}</span>
                 </div>
             </div>
         )
-    }
 }
 
 export default Education;

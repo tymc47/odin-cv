@@ -1,80 +1,64 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import "../styles/output.css"
 
 
-class WorkExp extends Component {
-    constructor (props) {
-        super(props);
-        this.state = {
-            isEdit: true,
-            jobTitle: "",
-            company: "",
-            companyLocation: "",
-            startDate: "", 
-            endDate: "",
-            jobDescription: "",
-            isPresent: false
-        }
-        this.handleChange = this.handleChange.bind(this);
-        this.handleCheckbox = this.handleCheckbox.bind(this);
-        this.toggleEdit = this.toggleEdit.bind(this);
+const WorkExp = (props) => {
 
-    }
+    const [isEdit, setIsEdit] = useState(true);
+    const [jobInfo, setJobInfo] = useState({
+        jobTitle: "",
+        company: "",
+        companyLocation: "",
+        startDate: "", 
+        endDate: "",
+        jobDescription: "",
+        isPresent: false
+    })
 
-    handleChange(event){
-        this.setState({
-            [event.target.id]: event.target.value
-        })
-    }
+    const handleCheckbox = () => setJobInfo({...jobInfo, isPresent: !jobInfo.isPresent})
+    
+    const toggleEdit = () => setIsEdit(!isEdit);
 
-    handleCheckbox(event){
-        this.setState({isPresent: event.target.checked})
-    }
+    const handleChange = (event) => setJobInfo({...jobInfo, [event.target.id]: event.target.value})
 
-    toggleEdit(){
-        this.setState({isEdit: this.state.isEdit ? false : true})
-    }
-
-    render(){
-        return this.state.isEdit ?
+        return isEdit ?
                (<div className="work-form">
                     <div className="name-input">
-                        <input type="text" onChange={this.handleChange} id="company" placeholder="Company" value={this.state.company} />
-                        <input type="text" onChange={this.handleChange} id="jobTitle" placeholder="Job Title" value={this.state.jobTitle} />
+                        <input type="text" onChange={handleChange} id="company" placeholder="Company" value={jobInfo.company} />
+                        <input type="text" onChange={handleChange} id="jobTitle" placeholder="Job Title" value={jobInfo.jobTitle} />
                     </div>
                     <div className="info-input">
-                        <input type="date" onChange={this.handleChange} id="startDate" value={this.state.startDate} />
-                        <input type="date" onChange={this.handleChange} id="endDate" disabled = {this.state.isPresent} value={this.state.endDate} />
+                        <input type="date" onChange={handleChange} id="startDate" value={jobInfo.startDate} />
+                        <input type="date" onChange={handleChange} id="endDate" disabled = {jobInfo.isPresent} value={jobInfo.endDate} />
                         <label htmlFor="isPresent">Current Job: 
-                            <input type="checkbox" onChange={this.handleCheckbox} id="isPresent" checked={this.state.isPresent} />
+                            <input type="checkbox" onChange={handleCheckbox} id="isPresent" checked={jobInfo.isPresent} />
                         </label>
-                        <input type="text" onChange={this.handleChange} id="companyLocation" placeholder="Company Location" value={this.state.companyLocation} />
+                        <input type="text" onChange={handleChange} id="companyLocation" placeholder="Company Location" value={jobInfo.companyLocation} />
                     </div>
                     <label htmlFor="job-description">Job description: </label>
-                        <textarea rows="8" col="33" onChange={this.handleChange} id="jobDescription" value={this.state.jobDescription} />
+                        <textarea rows="8" col="33" onChange={handleChange} id="jobDescription" value={jobInfo.jobDescription} />
 
                     <div className="button">
-                        <button id="save-btn" onClick={this.toggleEdit}>Save</button>
-                        <button id="delete-btn" data-workexp={this.props.id} onClick={this.props.handleDelete}>Delete</button>
+                        <button id="save-btn" onClick={toggleEdit}>Save</button>
+                        <button id="delete-btn" data-workexp={props.id} onClick={props.handleDelete}>Delete</button>
                     </div>
                 </div>)
-           : (<div className="work output" onClick={this.toggleEdit}>
+           : (<div className="work output" onClick={toggleEdit}>
                 <div className="job-info">
                     <ul>
-                        <li className="company">{this.state.company}</li> 
-                        <li className="title">{this.state.jobTitle}</li>
+                        <li className="company">{jobInfo.company}</li> 
+                        <li className="title">{jobInfo.jobTitle}</li>
                     </ul>
                     <div className="date-location">
-                        <span>{this.state.startDate} - {this.state.isPresent ? "Present" : this.state.endDate}</span> 
-                        <span>{this.state.companyLocation}</span>
+                        <span>{jobInfo.startDate} - {jobInfo.isPresent ? "Present" : jobInfo.endDate}</span> 
+                        <span>{jobInfo.companyLocation}</span>
                     </div>
                 </div>
                 <div className="job-des">
-                    {this.state.jobDescription}
+                    {jobInfo.jobDescription}
                 </div>
             </div>
         )
     }
-}
 
 export default WorkExp;
