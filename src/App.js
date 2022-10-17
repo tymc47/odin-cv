@@ -1,51 +1,51 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import PersonalInfo from "./components/PersonalInfo";
 import Education from "./components/Education";
 import WorkExp from "./components/WorkExp";
 import Skills from "./components/Skills";
 import "./styles/app.css";
 
-class App extends Component {
-  constructor(props){
-    super();
-    this.state = {
-      education: [],
-      workexp: [],
-      skills: [],
-    }
-    this.handleAdd = this.handleAdd.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
-  }
+const App = () => {
 
-  handleAdd(event){
+  const [education, setEducation] = useState([])
+  const [workexp, setWorkexp] = useState([])
+  const [skills, setSkills] = useState([])
+
+
+  const handleAdd = (event) => {
     const classList = event.target.classList 
     if (classList.contains('education')){
-      this.setState({
-        education: this.state.education.concat(<Education key={this.state.education.length} id={this.state.education.length} handleDelete={this.handleDelete}/>)
-        }
+      setEducation(
+        education.concat(<Education key={education.length} id={education.length} handleDelete={handleDelete}/>)
       )
     } else if(classList.contains('workexp')) {
-      this.setState({
-        workexp: this.state.workexp.concat(<WorkExp key={this.state.workexp.length} id={this.state.workexp.length} handleDelete={this.handleDelete}/>)
-      })
+      setWorkexp(
+        workexp.concat(<WorkExp key={workexp.length} id={workexp.length} handleDelete={handleDelete}/>)
+      )
     } else {
-      this.setState({
-        skills: this.state.skills.concat(<Skills key={this.state.skills.length} id={this.state.skills.length} handleDelete={this.handleDelete}/>)
-      })
-    }
-   
+      setSkills(
+        skills.concat(<Skills key={skills.length} id={skills.length} handleDelete={handleDelete}/>)
+      )
+    } 
   }
 
-  handleDelete(event){   
+  const handleDelete = (event) => {   
     const dataset = event.target.dataset;
-    let keyName = 'education' in dataset ? 'education' :
-                  'workexp' in dataset ? 'workexp' : 'skills';
-    const index = event.target.dataset[keyName]
-    const newArray = this.state[keyName].filter(entry => entry.key !== index)
-    this.setState({[keyName]: newArray})
+    if ('education' in dataset){
+      const index = event.target.dataset.education
+      const newArray = education.filter(entry => entry.key !== index)
+      setEducation(newArray)
+    } else if ('workexp' in dataset) {
+      const index = event.target.dataset.workexp
+      const newArray = workexp.filter(entry => entry.key !== index)
+      setWorkexp(newArray)
+    } else {
+      const index = event.target.dataset.skills
+      const newArray = skills.filter(entry => entry.key !== index)
+      setSkills(newArray)
+    }
   }
 
-  render(){
     return(
       <div className="main">
 
@@ -60,30 +60,28 @@ class App extends Component {
         <div className="education">
           <div className="section-title">
             <h1>Education</h1>
-            <button className="add-btn education" onClick={this.handleAdd}>+</button>
+            <button className="add-btn education" onClick={handleAdd}>+</button>
           </div>
-          {this.state.education.map((component) => component)}
+          {education.map((component) => component)}
         </div>
         <hr />
         <div className="work-exp">
           <div className="section-title">
             <h1>Work Experience</h1>
-            <button className="add-btn workexp" onClick={this.handleAdd}>+</button>
+            <button className="add-btn workexp" onClick={handleAdd}>+</button>
           </div>
-          {this.state.workexp.map((component) => component)}
+          {workexp.map((component) => component)}
         </div>
         <hr />
         <div className="skills">
           <div className="section-title">
             <h1>Skills</h1>
-            <button className="add-btn skills" onClick={this.handleAdd}>+</button>
+            <button className="add-btn skills" onClick={handleAdd}>+</button>
           </div>
-
-          {this.state.skills.map((component) => component)}
+          {skills.map((component) => component)}
         </div>
       </div>
     )
-  }
 }
 
 export default App;
